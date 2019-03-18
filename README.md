@@ -10,7 +10,7 @@ Attraverso QueueMe è possibile prendere posizione in coda attraverso il proprio
 Questo permette di, oltre che visualizzare in tempo reale lo stato della coda, impiegare il proprio tempo in altre faccende per essere poi avvertiti all'avvicinarsi del proprio turno alla coda.
 Insomma QueueMe permette di risparmiare e gestire in maniera ottimale la risorsa più importante: il tempo!<br>
 
-###Tecnologie utilizzate
+### Tecnologie utilizzate
 Back-end: firebase<br>
 Front-end: - react
            - reactstrap
@@ -19,7 +19,11 @@ Front-end: - react
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, you can run:<br>
+
+### `npm install`
+To install dependences ignored by the .gitignore
+
 ### `npm start`
 
 Runs the app in the development mode.<br>
