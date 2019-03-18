@@ -1,17 +1,17 @@
 ## Progetto PAWN 
-Gruppo di progettazione:
-Chiarella Vincenzo
-Iommi Matteo
-Zamparini Cristian
+Gruppo di progettazione:<br>
+Chiarella Vincenzo<br>
+Iommi Matteo<br>
+Zamparini Cristian<br>
 
 ### Idea del progetto della PWA
 L'applicazione QueueMe si propone di far risparmiare alle persone le lunghe e noiose code necessarie per accedere ad un servizio, che si tratti di una fila al supermercato, alle poste, in banca...
 Attraverso QueueMe è possibile prendere posizione in coda attraverso il proprio telefonino.
 Questo permette di, oltre che visualizzare in tempo reale lo stato della coda, impiegare il proprio tempo in altre faccende per essere poi avvertiti all'avvicinarsi del proprio turno alla coda.
-Insomma QueueMe permette di risparmiare e gestire in maniera ottimale la risorsa più importante: il tempo!
+Insomma QueueMe permette di risparmiare e gestire in maniera ottimale la risorsa più importante: il tempo!<br>
 
 ###Tecnologie utilizzate
-Back-end: firebase
+Back-end: firebase<br>
 Front-end: - react
            - reactstrap
            - argon template (per le grafiche)
