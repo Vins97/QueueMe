@@ -1,14 +1,14 @@
 {
   "short_name": "QueueME",
-  "name": "Manage your queues",
+  "name": "Manage your queue",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "icons8-entrare-in-coda-80.pn",
+      "sizes": "80x80",
+      "type": "image/png"
     }
   ],
-  "start_url": ".",
+  "start_url": "./index.html",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
