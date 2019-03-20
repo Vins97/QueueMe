@@ -78,12 +78,12 @@ class MenuAppBar extends React.Component {
     auth: true,
     anchorEl: null,
   };
- 
 
 
-  handleChange = event => {
-    this.setState({ auth: event.target.checked });
-  };
+
+  // handleChange = event => {
+  //   this.setState({ auth: event.target.checked });
+  // };
 
   handleMenu = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -104,28 +104,28 @@ class MenuAppBar extends React.Component {
         <AppBar position="static">
           <Toolbar>
             <div>
-            <IconButton   aria-owns={open ? 'menu-appbar' : undefined}
-                  aria-haspopup="true"
-                  onClick={this.handleMenu}
-                  color="inherit">
-              <MenuIcon />
-            </IconButton>
-            <Menu
-                  id="menu"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={open}
-                  onClose={this.handleClose}
-                >
-                <MenuItem onClick={<Link to={ROUTES.SIGN_IN}/>}>Profile</MenuItem>
-            </Menu>
+              <IconButton aria-owns={open ? 'menu-hamburger' : undefined}
+                aria-haspopup="true"
+                onClick={this.handleMenu}
+                color="inherit">
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-hamburger"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={open}
+                onClose={this.handleClose}
+              >                
+                  <MenuItem component={ Link } to={ROUTES.SIGN_IN} >Login</MenuItem>
+              </Menu>
             </div>
             <Typography align="center" variant="h6" color="inherit" className={classes.grow}>
               Queue Me
@@ -138,7 +138,7 @@ class MenuAppBar extends React.Component {
                   onClick={this.handleMenu}
                   color="inherit"
                 >
-                <AccountCircle />
+                  <AccountCircle />
                 </IconButton>
                 <Menu
                   id="menu-appbar"
@@ -153,9 +153,10 @@ class MenuAppBar extends React.Component {
                   }}
                   open={open}
                   onClose={this.handleClose}
-                >
-                  <MenuItem onClick={<Link to={ROUTES.ACCOUNT} />}>Profile</MenuItem>
-                  <MenuItem onClick={this.handleClose}><SignOutButton /></MenuItem>
+                >              
+                  <MenuItem component= { Link } to={ROUTES.ACCOUNT}>Profile</MenuItem>
+                  <MenuItem component= { Link } to={ROUTES.LANDING}><SignOutButton /></MenuItem>
+                  <MenuItem onClick={this.handleClose}>Close</MenuItem>
                 </Menu>
               </div>
             )}
