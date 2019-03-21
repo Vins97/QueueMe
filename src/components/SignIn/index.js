@@ -13,23 +13,25 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 //import TextField from '@material-ui/core/TextField';
 import Input from '@material-ui/core/Input';
-import FormControl from '@material-ui/core/FormControl';
-import { FormGroup } from '@material-ui/core';
+
+
 
 const SignInPage = () => (
-  <div>
-      <Typography variant="h5" color="textSecondary" gutterBottom>
+  
+    <div>
+      <Typography variant="h5" color="textSecondary" gutterBottom align="center">
         Accedi
       </Typography>
-    <Typography component="p">
+    <Typography component="p" align="center">
       <SignInForm />
       <SignInGoogle />
-      <SignInFacebook />
-      <SignInTwitter />
+      {/* <SignInFacebook />
+      <SignInTwitter /> */}
       <PasswordForgetLink />
       <SignUpLink />
     </Typography>
-  </div>
+    </div>
+ 
 
 );
 
@@ -72,9 +74,9 @@ class SignInFormBase extends Component {
 
     this.state = { ...INITIAL_STATE };
   }
-  handleChange = prop => event => {
-    this.setState({ [prop]: event.target.value });
-  };
+  // handleChange = prop => event => {
+  //   this.setState({ [prop]: event.target.value });
+  // };
 
   onSubmit = event => {
     const { email, password } = this.state;
@@ -104,7 +106,7 @@ class SignInFormBase extends Component {
 
 
     return (
-      <FormGroup >
+      <div>
         {/* <input
           name="email"
           value={email}
@@ -135,13 +137,11 @@ class SignInFormBase extends Component {
           type="password"
           placeholder="Password"
         />
-        <FormControl onSubmit={this.onSubmit}>
-          <Button disabled={isInvalid} variant="contained" color="primary" type="submit">
+          <Button disabled={isInvalid} variant="contained" color="primary" onClick= {this.onSubmit}>
             Login
           </Button>
           {error && <p>{error.message}</p>}
-        </FormControl>
-      </FormGroup>
+      </div>
     );
   }
 }
@@ -172,10 +172,8 @@ class SignInGoogleBase extends Component {
         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
           error.message = ERROR_MSG_ACCOUNT_EXISTS;
         }
-
         this.setState({ error });
       });
-
     event.preventDefault();
   };
 
@@ -183,108 +181,107 @@ class SignInGoogleBase extends Component {
     const { error } = this.state;
 
     return (
-      <form onSubmit={this.onSubmit}>
-
-        <Button variant="contained" color='secondary' type='submit'>Login Google</Button>
+      <div>
+        <Button variant="contained" color='secondary' onClick={this.onSubmit}>Login Google</Button>
         {/* <button type="submit">Sign In with Google</button> */}
 
         {error && <p>{error.message}</p>}
-      </form>
+      </div>
     );
   }
 }
 
-class SignInFacebookBase extends Component {
-  constructor(props) {
-    super(props);
+// class SignInFacebookBase extends Component {
+//   constructor(props) {
+//     super(props);
 
-    this.state = { error: null };
-  }
+//     this.state = { error: null };
+//   }
 
-  onSubmit = event => {
-    this.props.firebase
-      .doSignInWithFacebook()
-      .then(socialAuthUser => {
-        // Create a user in your Firebase Realtime Database too
-        return this.props.firebase.user(socialAuthUser.user.uid).set({
-          username: socialAuthUser.additionalUserInfo.profile.name,
-          email: socialAuthUser.additionalUserInfo.profile.email,
-          roles: [],
-        });
-      })
-      .then(() => {
-        this.setState({ error: null });
-        this.props.history.push(ROUTES.HOME);
-      })
-      .catch(error => {
-        if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
-          error.message = ERROR_MSG_ACCOUNT_EXISTS;
-        }
+//   onSubmit = event => {
+//     this.props.firebase
+//       .doSignInWithFacebook()
+//       .then(socialAuthUser => {
+//         // Create a user in your Firebase Realtime Database too
+//         return this.props.firebase.user(socialAuthUser.user.uid).set({
+//           username: socialAuthUser.additionalUserInfo.profile.name,
+//           email: socialAuthUser.additionalUserInfo.profile.email,
+//           roles: [],
+//         });
+//       })
+//       .then(() => {
+//         this.setState({ error: null });
+//         this.props.history.push(ROUTES.HOME);
+//       })
+//       .catch(error => {
+//         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
+//           error.message = ERROR_MSG_ACCOUNT_EXISTS;
+//         }
 
-        this.setState({ error });
-      });
+//         this.setState({ error });
+//       });
 
-    event.preventDefault();
-  };
+//     event.preventDefault();
+//   };
 
-  render() {
-    const { error } = this.state;
+//   render() {
+//     const { error } = this.state;
 
-    return (
-      <form onSubmit={this.onSubmit}>
-        <button type="submit">Sign In with Facebook</button>
+//     return (
+//       <form onSubmit={this.onSubmit}>
+//         <button type="submit">Sign In with Facebook</button>
 
-        {error && <p>{error.message}</p>}
-      </form>
-    );
-  }
-}
+//         {error && <p>{error.message}</p>}
+//       </form>
+//     );
+//   }
+// }
 
-class SignInTwitterBase extends Component {
-  constructor(props) {
-    super(props);
+// class SignInTwitterBase extends Component {
+//   constructor(props) {
+//     super(props);
 
-    this.state = { error: null };
-  }
+//     this.state = { error: null };
+//   }
 
-  onSubmit = event => {
-    this.props.firebase
-      .doSignInWithTwitter()
-      .then(socialAuthUser => {
-        // Create a user in your Firebase Realtime Database too
-        return this.props.firebase.user(socialAuthUser.user.uid).set({
-          username: socialAuthUser.additionalUserInfo.profile.name,
-          email: socialAuthUser.additionalUserInfo.profile.email,
-          roles: [],
-        });
-      })
-      .then(() => {
-        this.setState({ error: null });
-        this.props.history.push(ROUTES.HOME);
-      })
-      .catch(error => {
-        if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
-          error.message = ERROR_MSG_ACCOUNT_EXISTS;
-        }
+//   onSubmit = event => {
+//     this.props.firebase
+//       .doSignInWithTwitter()
+//       .then(socialAuthUser => {
+//         // Create a user in your Firebase Realtime Database too
+//         return this.props.firebase.user(socialAuthUser.user.uid).set({
+//           username: socialAuthUser.additionalUserInfo.profile.name,
+//           email: socialAuthUser.additionalUserInfo.profile.email,
+//           roles: [],
+//         });
+//       })
+//       .then(() => {
+//         this.setState({ error: null });
+//         this.props.history.push(ROUTES.HOME);
+//       })
+//       .catch(error => {
+//         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
+//           error.message = ERROR_MSG_ACCOUNT_EXISTS;
+//         }
 
-        this.setState({ error });
-      });
+//         this.setState({ error });
+//       });
 
-    event.preventDefault();
-  };
+//     event.preventDefault();
+//   };
 
-  render() {
-    const { error } = this.state;
+//   render() {
+//     const { error } = this.state;
 
-    return (
-      <form onSubmit={this.onSubmit}>
-        <button type="submit">Sign In with Twitter</button>
+//     return (
+//       <form onSubmit={this.onSubmit}>
+//         <button type="submit">Sign In with Twitter</button>
 
-        {error && <p>{error.message}</p>}
-      </form>
-    );
-  }
-}
+//         {error && <p>{error.message}</p>}
+//       </form>
+//     );
+//   }
+// }
 
 const SignInForm = compose(
   withRouter,
@@ -296,16 +293,17 @@ const SignInGoogle = compose(
   withFirebase,
 )(SignInGoogleBase);
 
-const SignInFacebook = compose(
-  withRouter,
-  withFirebase,
-)(SignInFacebookBase);
+// const SignInFacebook = compose(
+//   withRouter,
+//   withFirebase,
+// )(SignInFacebookBase);
 
-const SignInTwitter = compose(
-  withRouter,
-  withFirebase,
-)(SignInTwitterBase);
+// const SignInTwitter = compose(
+//   withRouter,
+//   withFirebase,
+// )(SignInTwitterBase);
 
 export default withStyles(styles)(SignInPage);
 
-export { SignInForm, SignInGoogle, SignInFacebook, SignInTwitter };
+//export { SignInForm, SignInGoogle, SignInFacebook, SignInTwitter };
+export { SignInForm, SignInGoogle};
