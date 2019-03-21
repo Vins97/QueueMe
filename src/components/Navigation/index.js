@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-//import { AuthUserContext } from '../Session';
+import { AuthUserContext } from '../Session';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 //import * as ROLES from '../../constants/roles';
@@ -20,13 +20,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
 
-// const Navigation = () => (
-//   <AuthUserContext.Consumer>
-//     {authUser =>
-//       authUser ? (<NavigationAuth authUser={authUser} />) : (<NavigationNonAuth />)
-//     }
-//   </AuthUserContext.Consumer>
-// );
+const Navigation = () => (
+  <AuthUserContext.Consumer>
+    {authUser =>
+      authUser ? (this.auth={authUser} ) : (this.auth=null)
+    }
+  </AuthUserContext.Consumer>
+);
 
 // const NavigationAuth = ({ authUser }) => (
 //   <div >
@@ -52,7 +52,6 @@ import Menu from '@material-ui/core/Menu';
 //     <AppBar>
 //       <ToolBar position="static">
 //         <Typography variant="title" color="inherit">
-
 //           <Link to={ROUTES.LANDING}>Landing</Link>
 //           <Link to={ROUTES.SIGN_IN}>Sign In</Link>
 //         </Typography>
@@ -75,12 +74,9 @@ const styles = {
 };
 class MenuAppBar extends React.Component {
   state = {
-    auth: true,
+    auth: null,
     anchorEl: null,
   };
-
-
-
   // handleChange = event => {
   //   this.setState({ auth: event.target.checked });
   // };
@@ -98,6 +94,7 @@ class MenuAppBar extends React.Component {
     const { classes } = this.props;
     const { auth, anchorEl } = this.state;
     const open = Boolean(anchorEl);
+    Navigation();
 
     return (
       <div className={classes.root}>
@@ -130,7 +127,7 @@ class MenuAppBar extends React.Component {
             <Typography align="center" variant="h6" color="inherit" className={classes.grow}>
               Queue Me
             </Typography>
-            {auth !== '' && (
+            {auth !== false && (
               <div>
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : undefined}

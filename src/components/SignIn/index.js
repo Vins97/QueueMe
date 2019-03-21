@@ -7,35 +7,30 @@ import { PasswordForgetLink } from '../PasswordForget';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-//import Button from '@material-ui/core/Button';
+
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import IconButton from '@material-ui/core/IconButton';
-import InputAdornment from '@material-ui/core/InputAdornment';
+//import TextField from '@material-ui/core/TextField';
+import Input from '@material-ui/core/Input';
+import FormControl from '@material-ui/core/FormControl';
+import { FormGroup } from '@material-ui/core';
 
 const SignInPage = () => (
-  <Card>
-    <CardContent>
+  <div>
       <Typography variant="h5" color="textSecondary" gutterBottom>
         Accedi
       </Typography>
-      <Typography component="p">
-        <SignInForm />
-        <SignInGoogle />
-        <SignInFacebook />
-        <SignInTwitter />
-        <PasswordForgetLink />
-        <SignUpLink />
-      </Typography>
-    </CardContent>
+    <Typography component="p">
+      <SignInForm />
+      <SignInGoogle />
+      <SignInFacebook />
+      <SignInTwitter />
+      <PasswordForgetLink />
+      <SignUpLink />
+    </Typography>
+  </div>
 
-  </Card>
 );
 
 const INITIAL_STATE = {
@@ -77,11 +72,6 @@ class SignInFormBase extends Component {
 
     this.state = { ...INITIAL_STATE };
   }
-
-  showPassword = false;
-  handleClickShowPassword = () => {
-    this.showPassword = !this.showPassword ;
-  };
   handleChange = prop => event => {
     this.setState({ [prop]: event.target.value });
   };
@@ -111,10 +101,10 @@ class SignInFormBase extends Component {
 
     const isInvalid = password === '' || email === '';
 
-    
+
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <FormGroup >
         {/* <input
           name="email"
           value={email}
@@ -122,15 +112,14 @@ class SignInFormBase extends Component {
           type="text"
           placeholder="Email Address"
         /> */}
-        <TextField
-          id="standard-required"
-          label="Required"
-          defaultValue="Indirizzo email"
-          margin="normal"
+        <Input
           name="email"
           value={email}
           onChange={this.onChange}
+          type="text"
+          placeholder="Email Address"
         />
+
         {/* <input
           name="password"
           value={password}
@@ -138,43 +127,21 @@ class SignInFormBase extends Component {
           type="password"
           placeholder="Password"
         /> */}
-        {/* <TextField
-          id="standard-password-input"
-          label="Required"
-          defaultValue="Password"
-          margin="normal"
+
+        <Input
           name="password"
-          type="password"
           value={password}
           onChange={this.onChange}
-        /> */}
-        <TextField
-          id="outlined-adornment-password"
-          variant="outlined"
-          type={this.showPassword ? 'text' : 'password'}
-          label="Password"
-          value={password}
-          onChange={this.handleChange('password')}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="Toggle password visibility"
-                  onClick={this.handleClickShowPassword}
-                >
-                  {this.showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
+          type="password"
+          placeholder="Password"
         />
-
-        <button disabled={isInvalid} type="submit">
-          Sign In
-        </button>
-
-        {error && <p>{error.message}</p>}
-      </form>
+        <FormControl onSubmit={this.onSubmit}>
+          <Button disabled={isInvalid} variant="contained" color="primary" type="submit">
+            Login
+          </Button>
+          {error && <p>{error.message}</p>}
+        </FormControl>
+      </FormGroup>
     );
   }
 }
@@ -217,7 +184,9 @@ class SignInGoogleBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <button type="submit">Sign In with Google</button>
+
+        <Button variant="contained" color='secondary' type='submit'>Login Google</Button>
+        {/* <button type="submit">Sign In with Google</button> */}
 
         {error && <p>{error.message}</p>}
       </form>
