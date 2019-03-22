@@ -25,8 +25,8 @@ const SignInPage = () => (
     <Typography component="p" align="center">
       <SignInForm />
       <SignInGoogle />
-      {/* <SignInFacebook />
-      <SignInTwitter /> */}
+      <SignInFacebook />
+      {/*<SignInTwitter /> */}
       <PasswordForgetLink />
       <SignUpLink />
     </Typography>
@@ -106,7 +106,8 @@ class SignInFormBase extends Component {
 
 
     return (
-      <div>
+      
+        <form onSubmit={this.onSubmit}>
         {/* <input
           name="email"
           value={email}
@@ -116,7 +117,7 @@ class SignInFormBase extends Component {
         /> */}
         <Input
           name="email"
-          value={email}
+          value={this.state.email}
           onChange={this.onChange}
           type="text"
           placeholder="Email Address"
@@ -132,16 +133,17 @@ class SignInFormBase extends Component {
 
         <Input
           name="password"
-          value={password}
+          value={this.state.password}
           onChange={this.onChange}
           type="password"
           placeholder="Password"
         />
-          <Button disabled={isInvalid} variant="contained" color="primary" onClick= {this.onSubmit}>
+          <Button disabled={isInvalid} variant="contained" color="primary" type="submit">
             Login
           </Button>
           {error && <p>{error.message}</p>}
-      </div>
+          </form>
+      
     );
   }
 }
@@ -183,7 +185,6 @@ class SignInGoogleBase extends Component {
     return (
       <div>
         <Button variant="contained" color='secondary' onClick={this.onSubmit}>Login Google</Button>
-        {/* <button type="submit">Sign In with Google</button> */}
 
         {error && <p>{error.message}</p>}
       </div>
@@ -191,51 +192,50 @@ class SignInGoogleBase extends Component {
   }
 }
 
-// class SignInFacebookBase extends Component {
-//   constructor(props) {
-//     super(props);
+class SignInFacebookBase extends Component {
+  constructor(props) {
+    super(props);
 
-//     this.state = { error: null };
-//   }
+    this.state = { error: null };
+  }
 
-//   onSubmit = event => {
-//     this.props.firebase
-//       .doSignInWithFacebook()
-//       .then(socialAuthUser => {
-//         // Create a user in your Firebase Realtime Database too
-//         return this.props.firebase.user(socialAuthUser.user.uid).set({
-//           username: socialAuthUser.additionalUserInfo.profile.name,
-//           email: socialAuthUser.additionalUserInfo.profile.email,
-//           roles: [],
-//         });
-//       })
-//       .then(() => {
-//         this.setState({ error: null });
-//         this.props.history.push(ROUTES.HOME);
-//       })
-//       .catch(error => {
-//         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
-//           error.message = ERROR_MSG_ACCOUNT_EXISTS;
-//         }
+  onSubmit = event => {
+    this.props.firebase
+      .doSignInWithFacebook()
+      .then(socialAuthUser => {
+        // Create a user in your Firebase Realtime Database too
+        return this.props.firebase.user(socialAuthUser.user.uid).set({
+          username: socialAuthUser.additionalUserInfo.profile.name,
+          email: socialAuthUser.additionalUserInfo.profile.email,
+          roles: [],
+        });
+      })
+      .then(() => {
+        this.setState({ error: null });
+        this.props.history.push(ROUTES.HOME);
+      })
+      .catch(error => {
+        if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
+          error.message = ERROR_MSG_ACCOUNT_EXISTS;
+        }
 
-//         this.setState({ error });
-//       });
+        this.setState({ error });
+      });
 
-//     event.preventDefault();
-//   };
+    event.preventDefault();
+  };
 
-//   render() {
-//     const { error } = this.state;
+  render() {
+    const { error } = this.state;
 
-//     return (
-//       <form onSubmit={this.onSubmit}>
-//         <button type="submit">Sign In with Facebook</button>
-
-//         {error && <p>{error.message}</p>}
-//       </form>
-//     );
-//   }
-// }
+    return (
+      <div>
+        <Button variant="contained" color='primary' onClick={this.onSubmit}>Login Facebook</Button>
+        {error && <p>{error.message}</p>}
+      </div>
+    );
+  }
+}
 
 // class SignInTwitterBase extends Component {
 //   constructor(props) {
@@ -293,10 +293,10 @@ const SignInGoogle = compose(
   withFirebase,
 )(SignInGoogleBase);
 
-// const SignInFacebook = compose(
-//   withRouter,
-//   withFirebase,
-// )(SignInFacebookBase);
+const SignInFacebook = compose(
+  withRouter,
+  withFirebase,
+)(SignInFacebookBase);
 
 // const SignInTwitter = compose(
 //   withRouter,

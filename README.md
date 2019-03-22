@@ -14,7 +14,7 @@ Insomma QueueMe permette di risparmiare e gestire in maniera ottimale la risorsa
 Back-end: firebase<br>
 Front-end: - react
            - reactstrap
-           - argon template (per le grafiche)
+           - material ui
 
 
 ## Available Scripts

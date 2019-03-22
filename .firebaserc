@@ -1,5 +1,6 @@
 {
   "projects": {
     "queueme": "queueme-ciovincri",
+    "default": "queueme-ciovincri"
   }
 }
