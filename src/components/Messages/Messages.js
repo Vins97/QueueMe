@@ -7,7 +7,6 @@ import MessageList from './MessageList';
 class Messages extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       text: '',
       loading: false,
@@ -115,7 +114,6 @@ class Messages extends Component {
             )}
 
             {!messages && <div>There are no messages ...</div>}
-
             <form
               onSubmit={event =>
                 this.onCreateMessage(event, authUser)
