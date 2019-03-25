@@ -11,7 +11,6 @@ import * as ROUTES from '../../constants/routes';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-//import TextField from '@material-ui/core/TextField';
 import Input from '@material-ui/core/Input';
 
 
@@ -26,7 +25,6 @@ const SignInPage = () => (
       <SignInForm />
       <SignInGoogle />
       <SignInFacebook />
-      {/*<SignInTwitter /> */}
       <PasswordForgetLink />
       <SignUpLink />
     </Typography>
@@ -108,13 +106,6 @@ class SignInFormBase extends Component {
     return (
       
         <form onSubmit={this.onSubmit}>
-        {/* <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        /> */}
         <Input
           name="email"
           value={this.state.email}
@@ -122,15 +113,6 @@ class SignInFormBase extends Component {
           type="text"
           placeholder="Email Address"
         />
-
-        {/* <input
-          name="password"
-          value={password}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        /> */}
-
         <Input
           name="password"
           value={this.state.password}
@@ -237,52 +219,6 @@ class SignInFacebookBase extends Component {
   }
 }
 
-// class SignInTwitterBase extends Component {
-//   constructor(props) {
-//     super(props);
-
-//     this.state = { error: null };
-//   }
-
-//   onSubmit = event => {
-//     this.props.firebase
-//       .doSignInWithTwitter()
-//       .then(socialAuthUser => {
-//         // Create a user in your Firebase Realtime Database too
-//         return this.props.firebase.user(socialAuthUser.user.uid).set({
-//           username: socialAuthUser.additionalUserInfo.profile.name,
-//           email: socialAuthUser.additionalUserInfo.profile.email,
-//           roles: [],
-//         });
-//       })
-//       .then(() => {
-//         this.setState({ error: null });
-//         this.props.history.push(ROUTES.HOME);
-//       })
-//       .catch(error => {
-//         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
-//           error.message = ERROR_MSG_ACCOUNT_EXISTS;
-//         }
-
-//         this.setState({ error });
-//       });
-
-//     event.preventDefault();
-//   };
-
-//   render() {
-//     const { error } = this.state;
-
-//     return (
-//       <form onSubmit={this.onSubmit}>
-//         <button type="submit">Sign In with Twitter</button>
-
-//         {error && <p>{error.message}</p>}
-//       </form>
-//     );
-//   }
-// }
-
 const SignInForm = compose(
   withRouter,
   withFirebase,
@@ -298,12 +234,6 @@ const SignInFacebook = compose(
   withFirebase,
 )(SignInFacebookBase);
 
-// const SignInTwitter = compose(
-//   withRouter,
-//   withFirebase,
-// )(SignInTwitterBase);
-
 export default withStyles(styles)(SignInPage);
 
-//export { SignInForm, SignInGoogle, SignInFacebook, SignInTwitter };
-export { SignInForm, SignInGoogle};
+export { SignInForm, SignInGoogle, SignInFacebook};
