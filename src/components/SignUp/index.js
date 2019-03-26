@@ -6,6 +6,8 @@ import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 
+import {Button} from '@material-ui/core/Button';
+
 const SignUpPage = () => (
   <div>
     <h1>SignUp</h1>
@@ -19,6 +21,7 @@ const INITIAL_STATE = {
   passwordOne: '',
   passwordTwo: '',
   isAdmin: false,
+  isCompany:false,
   error: null,
 };
 
@@ -39,6 +42,8 @@ class SignUpFormBase extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
+
+  
   onSubmit = event => {
     const { username, email, passwordOne, isAdmin } = this.state;
     const roles = [];
@@ -83,9 +88,14 @@ class SignUpFormBase extends Component {
     this.setState({ [event.target.name]: event.target.checked });
   };
 
+  
+
   render() {
     const {
       username,
+      ragionesociale,
+      piva,
+      sedelegale,
       email,
       passwordOne,
       passwordTwo,
@@ -99,8 +109,13 @@ class SignUpFormBase extends Component {
       email === '' ||
       username === '';
 
+     
+
     return (
       <form onSubmit={this.onSubmit}>
+      
+        
+       
         <input
           name="username"
           value={username}
@@ -154,6 +169,19 @@ const SignUpLink = () => (
   </p>
 );
 
+  const SignUpCompanyLink = () => (
+    <div>
+    <p>Sei un'azienda ? Effettua il SignUp apposito ! </p>
+          
+       
+         
+         <Button  component={Link} to={ROUTES.SIGN_UP}>SignUp Company</Button>
+
+
+        </div>
+      
+  );
+
 const SignUpForm = compose(
   withRouter,
   withFirebase,
@@ -161,4 +189,4 @@ const SignUpForm = compose(
 
 export default SignUpPage;
 
-export { SignUpForm, SignUpLink };
+export { SignUpForm, SignUpLink, SignUpCompanyLink };
