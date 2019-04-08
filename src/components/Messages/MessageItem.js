@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import { Typography } from '@material-ui/core';
+import { ListItem } from '@material-ui/core';
+
 
 class MessageItem extends Component {
   constructor(props) {
@@ -32,40 +37,42 @@ class MessageItem extends Component {
     const { editMode, editText } = this.state;
 
     return (
-      <li>
+      <ListItem>
         {editMode ? (
-          <input
+          <Input
             type="text"
             value={editText}
             onChange={this.onChangeEditText}
           />
         ) : (
-          <span>
-            <strong>
-              {message.user.username || message.user.userId}
-            </strong>{' '}
-            {message.text} {message.editedAt && <span>(Edited)</span>}
-          </span>
-        )}
+            <span>
+              <Typography variant='h5'>
+                {message.user.username || message.user.userId}
+              </Typography>{' '}
+              <Typography variant='h6'>
+                {message.text} {message.editedAt && <span>(Edited)</span>}
+              </Typography>
+            </span>
+          )}
 
         {editMode ? (
           <span>
-            <button onClick={this.onSaveEditText}>Save</button>
-            <button onClick={this.onToggleEditMode}>Reset</button>
+            <Button onClick={this.onSaveEditText}>Save</Button>
+            <Button onClick={this.onToggleEditMode}>Reset</Button>
           </span>
         ) : (
-          <button onClick={this.onToggleEditMode}>Edit</button>
-        )}
+            <Button onClick={this.onToggleEditMode}>Edit</Button>
+          )}
 
         {!editMode && (
-          <button
+          <Button
             type="button"
             onClick={() => onRemoveMessage(message.uid)}
           >
             Delete
-          </button>
+          </Button>
         )}
-      </li>
+      </ListItem>
     );
   }
 }
