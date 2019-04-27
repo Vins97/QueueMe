@@ -5,10 +5,12 @@ import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
 import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import Typography from '@material-ui/core/Typography';
 
 const PasswordForgetPage = () => (
   <div>
-    <h1>PasswordForget</h1>
+    <Typography variant='h3'align='center'>PasswordForget</Typography>
     <PasswordForgetForm />
   </div>
 );
@@ -51,7 +53,7 @@ class PasswordForgetFormBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <input
+        <Input
           name="email"
           value={this.state.email}
           onChange={this.onChange}
@@ -70,7 +72,7 @@ class PasswordForgetFormBase extends Component {
 
 const PasswordForgetLink = () => (
   <p>
-    <Link to={ROUTES.PASSWORD_FORGET}>Forgot Password?</Link>
+    <Button variant="contained" color="default" component= {Link} to={ROUTES.PASSWORD_FORGET}>Forgot Password?</Button>
   </p>
 );
 

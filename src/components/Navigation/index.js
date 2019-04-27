@@ -101,7 +101,7 @@ class MenuAppBar extends React.Component {
                 onClose={this.handleClose}
               >
                 <Navigation />
-                </Menu >
+                </Menu>
             </div>
               <Typography align="center" variant="h6" color="inherit" className={classes.grow}>
                 Queue Me

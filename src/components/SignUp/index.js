@@ -5,12 +5,15 @@ import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
+import { Typography } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
 
 import {Button} from '@material-ui/core/Button';
 
 const SignUpPage = () => (
   <div>
-    <h1>SignUp</h1>
+    <Typography variant='h2'> Signup </Typography>
     <SignUpForm />
   </div>
 );
@@ -99,7 +102,7 @@ class SignUpFormBase extends Component {
       email,
       passwordOne,
       passwordTwo,
-      isAdmin,
+      //isAdmin,
       error,
     } = this.state;
 
@@ -113,38 +116,35 @@ class SignUpFormBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-      
-        
-       
-        <input
+        <Input
           name="username"
           value={username}
           onChange={this.onChange}
           type="text"
           placeholder="Full Name"
         />
-        <input
+        <Input
           name="email"
           value={email}
           onChange={this.onChange}
           type="text"
           placeholder="Email Address"
         />
-        <input
+        <Input
           name="passwordOne"
           value={passwordOne}
           onChange={this.onChange}
           type="password"
           placeholder="Password"
         />
-        <input
+        <Input
           name="passwordTwo"
           value={passwordTwo}
           onChange={this.onChange}
           type="password"
           placeholder="Confirm Password"
         />
-        <label>
+        {/* <label>
           Admin:
           <input
             name="isAdmin"
@@ -152,10 +152,10 @@ class SignUpFormBase extends Component {
             checked={isAdmin}
             onChange={this.onChangeCheckbox}
           />
-        </label>
-        <button disabled={isInvalid} type="submit">
+        </label>*/}
+        <Button variant="contained" color="default" disabled={isInvalid} type="submit"> 
           Sign Up
-        </button>
+        </Button>
 
         {error && <p>{error.message}</p>}
       </form>
@@ -165,7 +165,7 @@ class SignUpFormBase extends Component {
 
 const SignUpLink = () => (
   <p>
-    Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+    Don't have an account? <Button variant="contained" color="default" component={Link} to={ROUTES.SIGN_UP}>Sign Up</Button>
   </p>
 );
 

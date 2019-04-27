@@ -103,6 +103,15 @@ class Firebase {
   message = uid => this.db.ref(`messages/${uid}`);
 
   messages = () => this.db.ref('messages');
+
+  // queues API
+  queue = uid => this.db.ref(`queues/${uid}`);
+
+  queues = () => this.db.ref('queues');
+
+  enqueue = ( uid , userid) => this.db.ref(`queues/${uid}/enqueued/${userid}`);
+  
+  usercounter = uid => this.db.ref(`queues/${uid}/usercounter`);
 }
 
 export default Firebase;
