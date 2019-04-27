@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import { Typography } from '@material-ui/core';
-import { ListItem } from '@material-ui/core';
+
 
 
 class MessageItem extends Component {
@@ -37,7 +37,7 @@ class MessageItem extends Component {
     const { editMode, editText } = this.state;
 
     return (
-      <ListItem>
+      <li>
         {editMode ? (
           <Input
             type="text"
@@ -72,9 +72,10 @@ class MessageItem extends Component {
             Delete
           </Button>
         )}
-      </ListItem>
+      </li>
     );
   }
+
 }
 
 export default MessageItem;

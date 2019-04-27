@@ -3,17 +3,19 @@ import React, { Component } from 'react';
 import { AuthUserContext } from '../Session';
 import { withFirebase } from '../Firebase';
 import QueueList from './QueueList';
+import { QueueMusic } from 'material-ui-icons';
 
 class Queues extends Component {
     constructor(props){
         super(props);
 
         this.state = {
-            company: '',
-            branch: '',
-            location: '',
+            company: '',//nome della compagnia
+            branch: '',//filiale
+            location: '',//coordinate
             loading: false,
-            queues: [],                        
+            usercounter: 0,
+            queues: [],//code disponibili          
         }
     }
     componentDidMount(){
@@ -50,7 +52,7 @@ class Queues extends Component {
     componentWillUnmount(){
         this.props.firebase.queues().off();
     }
-
+    //TODO: selezionabile solo dagli autorizzati
     onCreateQueue = (event, company, branch) => {
         this.props.firebase.queues().push({
             company: company,
@@ -74,7 +76,37 @@ class Queues extends Component {
         //controllare enqueue per 
         this.props.firebase.enqueue( queue , authUser ).push(true);
     }
-    
+    removeUserFromQueue = ( queue, authUser) =>{
+        var userInTheQueue = this.props.firebase.usercounter(queue.uid);
+        userInTheQueue.transaction( current_value => {
+            return (current_value || 0) - 1;
+        });
+        this.props.firebase.dequeue (queue, authUser).remove();
+    }
+    render(){
+        const { user } = this.props;
+        const { queues, company, branch, location, usercounter } = this.state;
+        return(
+            <AuthUserContext.Consumer>
+            {authUser => (         
+
+                <QueueList
+                    queues = {queues.map(queue => ({
+                        ...queue,
+                        company: company,
+                        branch: branch,
+                        location: location,
+                        usercounter: usercounter
+
+                    }))}
+                    onEnqueue={this.addUserInQueue}
+                    onDequeue={this.removeUserFromQueue}
+                    
+                />
+            )}
+            </AuthUserContext.Consumer>
+        )
+    }
 
 
 }

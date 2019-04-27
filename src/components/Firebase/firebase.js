@@ -110,6 +110,8 @@ class Firebase {
   queues = () => this.db.ref('queues');
 
   enqueue = ( uid , userid) => this.db.ref(`queues/${uid}/enqueued/${userid}`);
+
+  dequeue = ( uid, userid ) => this.db.ref(`queues/${uid}/enqueued/${userid}`);
   
   usercounter = uid => this.db.ref(`queues/${uid}/usercounter`);
 }
