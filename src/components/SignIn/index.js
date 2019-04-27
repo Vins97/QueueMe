@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 
-import { SignUpLink } from '../SignUp';
+import { SignUpLink , SignUpCompanyLink} from '../SignUp';
 import { PasswordForgetLink } from '../PasswordForget';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
+import Grid from '@material-ui/core/Grid';
 
 
 
@@ -22,11 +23,22 @@ const SignInPage = () => (
         Accedi
       </Typography>
     <Typography component="p" align="center">
+    <Grid justify="center"
+  alignItems="center" container spacing={24}>
+    <Grid item xs={8} >
       <SignInForm />
-      <SignInGoogle />
-      <SignInFacebook />
-      <PasswordForgetLink />
-      <SignUpLink />
+      </Grid>
+      <Grid item xs={8} >
+      <SignInGoogle /></Grid>
+      <Grid item xs={8} >
+      <SignInFacebook /></Grid>
+      <Grid item xs={8} >
+      <PasswordForgetLink /></Grid>
+      <Grid item xs={8} >
+      <SignUpLink /></Grid>
+      <Grid item xs={8} >
+      <SignUpCompanyLink /></Grid>
+      </Grid>
     </Typography>
     </div>
  
@@ -166,8 +178,9 @@ class SignInGoogleBase extends Component {
 
     return (
       <div>
-        <Button variant="contained" color='secondary' onClick={this.onSubmit}>Login Google</Button>
-
+         
+        <Button  size="large" variant="contained" color='secondary' onClick={this.onSubmit}>Login Google</Button>
+        
         {error && <p>{error.message}</p>}
       </div>
     );
@@ -212,12 +225,44 @@ class SignInFacebookBase extends Component {
 
     return (
       <div>
-        <Button variant="contained" color='primary' onClick={this.onSubmit}>Login Facebook</Button>
+          
+        <Button size="large" variant="contained" color='primary' onClick={this.onSubmit}>Login Facebook</Button>
+        
         {error && <p>{error.message}</p>}
       </div>
     );
   }
 }
+
+
+//class SignUpCompanyBase extends Component {
+ // constructor(props) {
+ //   super(props);
+
+ //   this.state = { error: null };
+ // }
+
+ // onSubmit = event =>{
+    
+
+    
+ // }
+
+
+ // render() {
+  //  const { error } = this.state;
+
+  //  return (
+  //    <div>
+  //      <p>Sei un'azienda ? Effettua il SignUp apposito ! </p>
+          
+   //     <Button size="large" variant="contained" color='primary' onClick={this.onSubmit}>SignUp Company</Button>
+        
+   //     {error && <p>{error.message}</p>}
+  //    </div>
+  //  );
+ // }
+//}
 
 const SignInForm = compose(
   withRouter,
@@ -233,6 +278,7 @@ const SignInFacebook = compose(
   withRouter,
   withFirebase,
 )(SignInFacebookBase);
+
 
 export default withStyles(styles)(SignInPage);
 
